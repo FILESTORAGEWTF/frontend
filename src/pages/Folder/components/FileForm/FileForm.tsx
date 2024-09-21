@@ -1,7 +1,10 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { uploadFile } from '../../../../shared/services/uploadFile';
 
-export const FileForm = () => {
+interface Props {
+  folderId?: string;
+}
+export const FileForm: FC<Props> = ({ folderId }) => {
   const [file, setFile] = useState<File | null>(null);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -17,6 +20,12 @@ export const FileForm = () => {
 
     const formData = new FormData();
     formData.append('file', file);
+    if (folderId) {
+      console.log('folder id', folderId);
+      formData.append('parentId', folderId);
+      console.log('formData ==> ', formData.get('parentId'));
+    }
+
     try {
       const response = await uploadFile(formData);
       console.log('File uploaded successfully:', response);
