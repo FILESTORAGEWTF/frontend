@@ -6,9 +6,9 @@ import { Resources } from './components/Resources';
 import { ResourceForm } from '../../shared/components';
 
 interface UpdateFormState {
-  resourceId: number;
   name: string;
   shareable: boolean;
+  resourceId: number;
 }
 
 export const Folder: FC = () => {
@@ -16,7 +16,7 @@ export const Folder: FC = () => {
   const { resources } = useResources(folderId);
   const [isFormOpen, setFormOpen] = useState(false);
   const [isCreateFormOpen, setCreateFormOpen] = useState(false);
-  const [UpdateFormState, setUpdateFormOpen] = useState<null | UpdateFormState>(null);
+  const [updateFormState, setUpdateFormOpen] = useState<null | UpdateFormState>(null);
 
   const onOpenUpdateForm = useCallback((name: string, shareable: boolean, resourceId: number) => {
     setUpdateFormOpen({ name, shareable, resourceId });
@@ -39,8 +39,8 @@ export const Folder: FC = () => {
       <div className="flex justify-between">
         {resources && <Resources resources={resources} openUpdateForm={onOpenUpdateForm} />}
         {isFormOpen && <FileForm folderId={folderId} />}
-        {isCreateFormOpen && <ResourceForm folderId={folderId} />}
-        {UpdateFormState && <ResourceForm initialValues={UpdateFormState} folderId={folderId} />}
+        {isCreateFormOpen && <ResourceForm parentId={folderId} />}
+        {updateFormState && <ResourceForm initialValues={updateFormState} parentId={folderId} />}
       </div>
     </div>
   );

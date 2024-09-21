@@ -1,20 +1,25 @@
 import { FC, useEffect, useState } from 'react';
+import useBoundStore from '../../../store/useStore';
+import { ResourceType } from '../../types/resource';
 
 interface FormValues {
   name: string;
-  shareable: boolean;
+  shareable?: boolean;
 }
 
 interface Props {
-  folderId?: string;
+  parentId?: string;
   initialValues?: FormValues & { resourceId: number };
 }
 
-export const ResourceForm: FC<Props> = ({ initialValues, folderId }) => {
+export const ResourceForm: FC<Props> = ({ initialValues, parentId = null }) => {
   const [formValues, setFormValues] = useState<FormValues>({
     name: '',
-    shareable: false,
   });
+
+  console.log('====>', formValues);
+
+  const { updateResource, createFolder } = useBoundStore();
 
   useEffect(() => {
     if (initialValues) {
@@ -39,9 +44,22 @@ export const ResourceForm: FC<Props> = ({ initialValues, folderId }) => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formValues, initialValues?.resourceId, folderId);
+    const { shareable, name } = formValues;
+    if (shareable === undefined || !name) {
+      return;
+    }
+
+    try {
+      if (initialValues) {
+        return updateResource({ name, shareable }, initialValues.resourceId);
+      } else {
+        return createFolder({ name, shareable, parentId, type: ResourceType.FOLDER });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -54,15 +72,16 @@ export const ResourceForm: FC<Props> = ({ initialValues, folderId }) => {
           name="name"
           value={formValues.name}
           onChange={handleInputChange}
-          className="outline rounded w-full"
+          className="outline rounded w-full bg-white"
         />
       </div>
       <div className="flex flex-col items-start gap-3">
         <label htmlFor="sharable">Sharable:</label>
         <input
           type="checkbox"
-          id="sharable"
-          name="sharable"
+          id="shareable"
+          name="shareable"
+          // className="bg-white"
           checked={formValues.shareable}
           onChange={handleCheckboxChange}
         />

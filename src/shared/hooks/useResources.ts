@@ -2,14 +2,13 @@ import { useEffect, useMemo } from 'react';
 import useBoundStore from '../../store/useStore';
 
 export const useResources = (resourceId?: string) => {
-  const { getCategories, resources } = useBoundStore();
-  console.log(resourceId);
+  const { getResources, resources } = useBoundStore();
 
   useEffect(() => {
-    if (!resources) {
-      getCategories();
+    if (!resources.length) {
+      getResources();
     }
-  }, [resources, getCategories]);
+  }, [getResources, resources]);
 
   const filteredResources = useMemo(() => {
     if (!resources) return resources;

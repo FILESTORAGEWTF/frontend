@@ -12,8 +12,8 @@ export const postFolder = async (formData: CreateResourceData): Promise<Resource
   return response.data;
 };
 
-export const patchResource = async (formData: UpdateResourceData): Promise<Resource> => {
-  const response = await APIService.patch<Resource>('/resource', formData);
+export const patchResource = async (formData: UpdateResourceData, id: number): Promise<Resource> => {
+  const response = await APIService.patch<Resource>(`/resource/${id}`, formData);
   return response.data;
 };
 

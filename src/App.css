@@ -11,6 +11,19 @@
   margin: 0;
 }
 
+input[type="checkbox"] {
+  appearance: auto; /* Залишаємо стандартний вигляд чекбокса */
+  width: 20px;
+  height: 20px;
+  background-color: white; /* Фон білий, коли чекбокс не вибраний */
+  border: 2px solid #ccc; /* Легка рамка, якщо потрібна */
+}
+
+input[type="checkbox"]:checked {
+  background-color: #007bff; /* Колір фону при вибраному чекбоксі */
+}
+
+
 
 
 

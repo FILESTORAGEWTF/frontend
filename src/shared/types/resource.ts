@@ -13,13 +13,12 @@ export enum ResourceType {
 
 export interface UpdateResourceData {
   name: string;
-  parentId: number;
-  sharable: boolean;
-  id: number;
+  shareable: boolean;
 }
 
 export interface CreateResourceData {
   name: string;
-  parentId: number;
-  sharable: boolean;
+  parentId: string | null;
+  shareable: boolean;
+  type: ResourceType.FOLDER;
 }
