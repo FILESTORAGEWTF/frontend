@@ -8,7 +8,8 @@ export const useResources = (resourceId?: string) => {
     if (!resources.length) {
       getResources();
     }
-  }, [getResources, resources]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const filteredResources = useMemo(() => {
     if (!resources) return resources;

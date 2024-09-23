@@ -7,6 +7,16 @@ export const fetchResources = async (): Promise<Resource[]> => {
   return response.data;
 };
 
+export const fetchSharedResourcesByParentId = async (parentId: number): Promise<Resource[]> => {
+  const response = await APIService.get<Resource[]>(`/resource/shared/${parentId}`);
+  return response.data;
+};
+
+export const fetchSharedResources = async (): Promise<Resource[]> => {
+  const response = await APIService.get<Resource[]>('/resource/shared');
+  return response.data;
+};
+
 export const postFolder = async (formData: CreateResourceData): Promise<Resource> => {
   const response = await APIService.post<Resource>('/resource', formData);
   return response.data;

@@ -1,5 +1,5 @@
 import { ChangeEvent, FC, FormEvent, useState } from 'react';
-import { uploadFile } from '../../../../shared/services/uploadFile';
+import { uploadFile } from '../../../../services/uploadFile';
 
 interface Props {
   folderId?: string;

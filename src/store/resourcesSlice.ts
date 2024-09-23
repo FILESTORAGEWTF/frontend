@@ -1,19 +1,31 @@
 import { StateCreator } from 'zustand';
-import { deleteResource, fetchResources, patchResource, postFolder } from '../shared/services/fetchResources';
+import {
+  deleteResource,
+  fetchResources,
+  fetchSharedResources,
+  fetchSharedResourcesByParentId,
+  patchResource,
+  postFolder,
+} from '../shared/services/fetchResources';
 import { Resource } from '../shared/types';
 import { CreateResourceData, UpdateResourceData } from '../shared/types/resource';
 
 export interface ResourcesSlice {
   resources: Resource[];
+  sharedResources: Resource[];
   getResources: () => Promise<void>;
   createFolder: (data: CreateResourceData) => Promise<void>;
   updateResource: (data: UpdateResourceData, id: number) => Promise<void>;
   addFileData: (data: Resource) => void;
   deleteResource: (id: number) => Promise<void>;
+
+  getSharedResources: () => Promise<void>;
+  getSharedSubResources: (parentId: number) => Promise<void>;
 }
 
 const createResourcesSlice: StateCreator<ResourcesSlice> = (set, get) => ({
   resources: [],
+  sharedResources: [],
   getResources: async () => {
     const response = await fetchResources();
     set({ resources: response });
@@ -49,6 +61,16 @@ const createResourcesSlice: StateCreator<ResourcesSlice> = (set, get) => ({
     const { resources } = get();
     const newOrderList: Resource[] = resources.filter((resource) => resource.id !== id);
     set({ resources: newOrderList });
+  },
+
+  getSharedResources: async () => {
+    const response = await fetchSharedResources();
+    set({ sharedResources: response });
+  },
+
+  getSharedSubResources: async (parentId) => {
+    const response = await fetchSharedResourcesByParentId(parentId);
+    set({ sharedResources: response });
   },
 });
 

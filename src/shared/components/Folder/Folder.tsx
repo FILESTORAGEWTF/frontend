@@ -1,19 +1,20 @@
 import { FC, useCallback, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useResources } from '../../shared/hooks/useResources';
 import { FileForm } from './components';
 import { Resources } from './components/Resources';
-import { ResourceForm } from '../../shared/components';
+import { ResourceForm } from '..';
+import { Resource } from '../../types';
 
 interface UpdateFormState {
   name: string;
   shareable: boolean;
   resourceId: number;
 }
-
-export const Folder: FC = () => {
+interface Props {
+  resources: Resource[];
+}
+export const Folder: FC<Props> = ({ resources }) => {
   const { folderId } = useParams();
-  const { resources } = useResources(folderId);
   const [isFormOpen, setFormOpen] = useState(false);
   const [isCreateFormOpen, setCreateFormOpen] = useState(false);
   const [updateFormState, setUpdateFormOpen] = useState<null | UpdateFormState>(null);
@@ -22,6 +23,7 @@ export const Folder: FC = () => {
     setUpdateFormOpen({ name, shareable, resourceId });
   }, []);
 
+  console.log('im in folder ', resources)
   return (
     <div className="flex flex-col gap-10 px-5">
       <div className="flex justify-between items-center">
