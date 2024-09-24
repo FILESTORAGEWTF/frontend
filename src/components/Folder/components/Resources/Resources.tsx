@@ -1,11 +1,13 @@
 import { FC } from 'react';
-import { Resource } from '~/types';
+import { Resource, ResourceType } from '~/types';
 import { PermissionType } from '~/types';
 import { useNavigate } from 'react-router-dom';
 import { FiShare2 } from 'react-icons/fi';
 import { FaPen } from 'react-icons/fa';
 import { RiDeleteBin6Line } from 'react-icons/ri';
+import { IoMdDownload } from 'react-icons/io';
 import { useModal } from '~/hooks';
+import { downloadFile } from '~/services/file';
 
 interface Props {
   resources: Resource[];
@@ -27,9 +29,13 @@ export const Resources: FC<Props> = ({ resources, isDashboard, folderId = null }
     }
   };
 
+  const onDownloadFile = (id: number) => {
+    downloadFile(id);
+  };
+
   return (
     <div className="flex gap-4 flex-wrap p-2">
-      {resources.map(({ id, name, permissionType, shareable }) => {
+      {resources.map(({ id, name, permissionType, shareable, type }) => {
         return (
           <div className="" key={id}>
             <div className="flex gap-2 justify-end">
@@ -52,6 +58,11 @@ export const Resources: FC<Props> = ({ resources, isDashboard, folderId = null }
                   onClick={() => openPermissionModal(id, name)}
                 >
                   <FiShare2 />
+                </button>
+              )}
+              {type === ResourceType.FILE && (
+                <button className="rounded p-1 bg-gray-300 hover:bg-gray-400" onClick={() => onDownloadFile(id)}>
+                  <IoMdDownload />
                 </button>
               )}
             </div>
