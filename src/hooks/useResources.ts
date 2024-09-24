@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import useBoundStore from '../store/useStore';
+import useBoundStore from '~/store/useStore';
 
 export const useResources = (parentId?: string) => {
   const { getResources, resources } = useBoundStore();

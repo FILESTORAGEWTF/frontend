@@ -1,8 +1,8 @@
 import { FC, useMemo } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { Resources } from './components/Resources';
-import { ModalEnum, Resource } from '../../types';
-import useBoundStore from '../../store/useStore';
+import { Resources } from './components';
+import { ModalEnum, Resource } from '~/types';
+import useBoundStore from '~/store/useStore';
 
 interface Props {
   resources: Resource[];

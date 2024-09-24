@@ -1,7 +1,7 @@
 import { MdLogout } from 'react-icons/md';
 import { FcGoogle } from 'react-icons/fc';
-import useBoundStore from '../../../../store/useStore';
-import { singInWithGoogle, singOutAccount } from '../../../../auth/firebase';
+import useBoundStore from '~/store/useStore';
+import { singInWithGoogle, singOutAccount } from '~/auth/firebase';
 
 export const Header = () => {
   const { isLoggedIn } = useBoundStore();

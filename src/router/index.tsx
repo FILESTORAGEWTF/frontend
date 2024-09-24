@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import { DefaultLayout } from '../layout';
-import { Dashboard, Empty, File, Shared } from '../pages';
+import { DefaultLayout } from '~/layout';
+import { Dashboard, Empty, File, Shared } from '~/pages';
 import { AuthGuard } from './AuthGuard';
 
 export const router = createBrowserRouter([

@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
-import { auth } from '../auth/firebase';
-import useBoundStore from '../store/useStore';
+import { auth } from '~/auth/firebase';
+import useBoundStore from '~/store/useStore';
 
 interface AuthGuardProps {
   Page: React.ComponentType;

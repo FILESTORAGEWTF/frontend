@@ -1,9 +1,9 @@
 import { createPortal } from 'react-dom';
-import useBoundStore from '../../store/useStore';
-import { ModalEnum } from '../../types';
-import { PermissionsForm, ResourceForm } from '../../components';
+import useBoundStore from '~/store/useStore';
+import { ModalEnum } from '~/types';
+import { PermissionsForm, ResourceForm } from '~/components';
 import { ConfirmDelete } from './components';
-import { FileForm } from '../../components/FileForm';
+import { FileForm } from '~/components';
 import { useRef } from 'react';
 import { IoClose } from 'react-icons/io5';
 

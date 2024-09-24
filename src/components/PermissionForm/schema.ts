@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { PermissionType } from '../../types/resource';
+import { PermissionType } from '~/types';
 
 export const schema = yup.object().shape({
   permissions: yup

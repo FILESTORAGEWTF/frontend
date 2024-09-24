@@ -1,7 +1,7 @@
 import { StateCreator } from 'zustand';
 
-import { User } from '../types/user';
-import { fetchUsers } from '../services/users';
+import { User } from '~/types/user';
+import { fetchUsers } from '~/services/users';
 
 export interface UsersSLice {
   users: User[];

@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, FormEvent, useState } from 'react';
-import { uploadFile } from '../../services/file';
-import useBoundStore from '../../store/useStore';
+import { uploadFile } from '~/services/file';
+import useBoundStore from '~/store/useStore';
 
 interface Props {
   folderId?: string;

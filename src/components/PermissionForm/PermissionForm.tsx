@@ -2,9 +2,9 @@ import React, { useEffect, useMemo } from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import useBoundStore from '../../store/useStore';
-import { PermissionType } from '../../types/resource';
-import { postPermissions } from '../../services/permissions';
+import useBoundStore from '~/store/useStore';
+import { PermissionType } from '~/types';
+import { postPermissions } from '~/services/permissions';
 import { schema } from './schema';
 
 type FormValues = {

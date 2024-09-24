@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import { Resource } from '../../../../types';
-import { PermissionType } from '../../../../types/resource';
+import { Resource } from '~/types';
+import { PermissionType } from '~/types';
 import { useNavigate } from 'react-router-dom';
 import { FiShare2 } from 'react-icons/fi';
 import { FaPen } from 'react-icons/fa';
 import { RiDeleteBin6Line } from 'react-icons/ri';
-import { useModal } from '../../../../hooks/useModal';
+import { useModal } from '~/hooks';
 
 interface Props {
   resources: Resource[];

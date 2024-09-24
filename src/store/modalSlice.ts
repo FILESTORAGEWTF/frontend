@@ -1,5 +1,5 @@
 import { StateCreator } from 'zustand';
-import { ModalEnum } from '../types';
+import { ModalEnum } from '~/types';
 
 export const initialModalState = { modalType: ModalEnum.NONE, data: null };
 

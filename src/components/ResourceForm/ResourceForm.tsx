@@ -1,8 +1,8 @@
 import { FC, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import useBoundStore from '../../store/useStore';
-import { ResourceType } from '../../types/resource';
+import useBoundStore from '~/store/useStore';
+import { ResourceType } from '~/types';
 import { schema } from './schema';
 
 interface FormValues {

@@ -1,4 +1,4 @@
-import { User } from '../../types/user';
+import { User } from '~/types';
 import { APIService } from './api-client';
 
 export const fetchUsers = async (): Promise<User[]> => {

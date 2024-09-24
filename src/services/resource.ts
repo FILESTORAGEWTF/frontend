@@ -1,5 +1,5 @@
-import { Resource } from '../../types';
-import { CreateResourceData, UpdateResourceData } from '../../types/resource';
+import { Resource } from '~/types';
+import { CreateResourceData, UpdateResourceData } from '~/types/resource';
 import { APIService } from './api-client';
 
 export const fetchResources = async (): Promise<Resource[]> => {

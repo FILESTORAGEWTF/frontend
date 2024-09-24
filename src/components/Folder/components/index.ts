@@ -1,1 +1,1 @@
-export { FileForm } from './FileForm';
+export { Resources } from './Resources';

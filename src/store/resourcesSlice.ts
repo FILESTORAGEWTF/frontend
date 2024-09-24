@@ -6,9 +6,9 @@ import {
   fetchSharedResourcesByParentId,
   patchResource,
   postFolder,
-} from '../services/resource';
-import { Resource } from '../types';
-import { CreateResourceData, UpdateResourceData } from '../types/resource';
+} from '~/services/resource';
+import { Resource } from '~/types';
+import { CreateResourceData, UpdateResourceData } from '~/types';
 
 export interface ResourcesSlice {
   resources: Resource[];

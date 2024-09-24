@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import useBoundStore from '../../../../store/useStore';
+import useBoundStore from '~/store/useStore';
 
 interface Props {
   resourceId: number;

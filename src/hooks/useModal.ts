@@ -1,5 +1,5 @@
-import useBoundStore from '../store/useStore';
-import { ModalEnum } from '../types';
+import useBoundStore from '~/store/useStore';
+import { ModalEnum } from '~/types';
 
 interface Props {
   id: number;

@@ -1,4 +1,4 @@
-import { Permission } from '../../types/permissions';
+import { Permission } from '~/types';
 import { APIService } from './api-client';
 
 interface PostPermissionsFormData {
