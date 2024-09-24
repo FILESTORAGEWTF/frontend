@@ -12,7 +12,7 @@ type ModalData =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   | { modalType: typeof ModalEnum.CREATE_PERMISSION; data: any }
   | { modalType: typeof ModalEnum.UPLOAD_FILE; data: UploadFileModalData }
-  | { modalType: typeof ModalEnum.NONE; data: null };
+  | { modalType: typeof ModalEnum.NONE; data: PermissionModalData };
 
 interface CreateFolderModalData {
   parentId: string;
@@ -24,9 +24,15 @@ interface UploadFileModalData {
 
 interface DeleteResourceModalData {
   resourceId: number;
+  name: string;
 }
 
-interface UpdateResourceModalData {
+interface PermissionModalData {
+  resourceId: number;
+  name: string;
+}
+
+export interface UpdateResourceModalData {
   parentId: string;
   resourceId: string;
 

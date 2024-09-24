@@ -1,8 +1,11 @@
 import { FC } from 'react';
-import { ModalEnum, Resource } from '../../../../types';
-import useBoundStore from '../../../../store/useStore';
+import { Resource } from '../../../../types';
 import { PermissionType } from '../../../../types/resource';
 import { useNavigate } from 'react-router-dom';
+import { FiShare2 } from 'react-icons/fi';
+import { FaPen } from 'react-icons/fa';
+import { RiDeleteBin6Line } from 'react-icons/ri';
+import { useModal } from '../../../../hooks/useModal';
 
 interface Props {
   resources: Resource[];
@@ -11,8 +14,7 @@ interface Props {
 }
 export const Resources: FC<Props> = ({ resources, isDashboard, folderId = null }) => {
   const navigate = useNavigate();
-
-  const { openModal } = useBoundStore();
+  const { openUpdateModal, openDeleteModal, openPermissionModal } = useModal();
 
   const checkUpdatable = (permissionType?: PermissionType) =>
     permissionType ? permissionType === PermissionType.UPDATE : false;
@@ -30,51 +32,33 @@ export const Resources: FC<Props> = ({ resources, isDashboard, folderId = null }
       {resources.map(({ id, name, permissionType, shareable }) => {
         return (
           <div className="" key={id}>
-            <div className="border-2 flex gap-2">
+            <div className="flex gap-2 justify-end">
               {(isDashboard || checkUpdatable(permissionType)) && (
                 <button
-                  className="border-2 rounded-lg"
-                  onClick={() =>
-                    openModal({
-                      modalType: ModalEnum.UPDATE_RESOURCE,
-                      data: {
-                        resourceId: id,
-                        parentId: folderId,
-                        initialValues: {
-                          shareable,
-                          name,
-                        },
-                      },
-                    })
-                  }
+                  className="rounded p-1 bg-gray-300 hover:bg-gray-400"
+                  onClick={() => openUpdateModal({ id, parentId: folderId, name, shareable })}
                 >
-                  update
+                  <FaPen />
                 </button>
               )}
               {isDashboard && (
+                <button className="rounded p-1 bg-gray-300 hover:bg-gray-400" onClick={() => openDeleteModal(id, name)}>
+                  <RiDeleteBin6Line />
+                </button>
+              )}
+              {isDashboard && shareable && (
                 <button
-                  className="border-2 rounded-lg"
-                  onClick={() => openModal({ modalType: ModalEnum.CONFIRM_DELETE, data: { resourceId: id } })}
+                  className="rounded p-1 bg-gray-300 hover:bg-gray-400"
+                  onClick={() => openPermissionModal(id, name)}
                 >
-                  delete
+                  <FiShare2 />
                 </button>
               )}
             </div>
 
-            {isDashboard && shareable && (
-              <button
-                className="border-2 rounded-lg"
-                onClick={() => openModal({ modalType: ModalEnum.CREATE_PERMISSION, data: { resourceId: id } })}
-              >
-                share
-              </button>
-            )}
-
-            <div className="mb-5"></div>
-
-            <div className="border-1 flex flex-col items-center gap-3 w-24" onClick={() => handleFolderChange(id)}>
-              <div className="h-20 w-20 bg-slate-400"></div>
-              <span className="w-2/3 truncate" title={name}>
+            <div className="border-1 flex flex-col items-center gap-2 w-28" onClick={() => handleFolderChange(id)}>
+              <div className="h-28 w-28 mt-3 bg-slate-400"></div>
+              <span className="w-full px-2 whitespace-pre-wrap truncate" title={name}>
                 {name}
               </span>
             </div>

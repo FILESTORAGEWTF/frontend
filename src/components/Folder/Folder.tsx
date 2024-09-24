@@ -38,10 +38,10 @@ export const Folder: FC<Props> = ({ resources }) => {
         <h6 className="px-3">Folder {folderId}</h6>
         {isDashboard && (
           <div className="flex gap-3 p-4">
-            <button className="border rounded py-1 px-3" onClick={openUploadFileModal}>
+            <button className="border rounded py-1 px-3 bg-gray-300 hover:bg-gray-400" onClick={openUploadFileModal}>
               upload file
             </button>
-            <button className="border rounded py-1 px-3" onClick={openCreateFolderModal}>
+            <button className="border rounded py-1 px-3 bg-gray-300 hover:bg-gray-400" onClick={openCreateFolderModal}>
               new folder
             </button>
           </div>

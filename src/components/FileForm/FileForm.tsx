@@ -47,13 +47,37 @@ export const FileForm: FC<Props> = ({ folderId }) => {
   };
 
   return (
-    <form onSubmit={submitFile} className="rounded-2xl border-4 flex-col items-center px-5">
-      <h6>upload a new file</h6>
-      <input type="checkbox" name="shareable" id="shareable" checked={shareable} onChange={handleCheckboxChange} />
-      <input className="mt-5 w-2/3" type="file" onChange={handleFileChange} />
-      <button type="submit" className="border-2 mt-5 rounded-xl px-3">
-        Upload
-      </button>
+    <form onSubmit={submitFile} className="rounded-2xl flex-col items-center">
+      <h4 className="text-center text-lg font-semibold">Upload a new file </h4>
+      <div className="flex flex-col items-start p-4 rounded-lg">
+        <label htmlFor="shareable" className="flex items-center mb-3 text-lg">
+          <input
+            type="checkbox"
+            name="shareable"
+            id="shareable"
+            checked={shareable}
+            onChange={handleCheckboxChange}
+            className="mr-2"
+          />
+          <span>Shareable</span>
+        </label>
+
+        <div className="mt-5 w-full">
+          <label htmlFor="file-upload" className="block text-lg mb-1">
+            Upload File:
+          </label>
+          <input
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 bg-gray-300 hover:bg-gray-400"
+            type="file"
+            id="file-upload"
+            onChange={handleFileChange}
+          />
+        </div>
+
+        <button type="submit" className="border-2 mt-5 rounded-md p-2 bg-gray-300 hover:bg-gray-400 self-end">
+          Upload
+        </button>
+      </div>
     </form>
   );
 };
