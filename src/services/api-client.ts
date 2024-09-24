@@ -4,7 +4,7 @@ const APIService = axios.create();
 
 APIService.interceptors.request.use(
   async (config) => {
-    config.baseURL = 'http://localhost:3000';
+    config.baseURL = import.meta.env.VITE_API_BASE_URL;
     config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
     return config;
   },
