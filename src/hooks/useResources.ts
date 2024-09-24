@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
-import useBoundStore from '../../store/useStore';
+import useBoundStore from '../store/useStore';
 
-export const useResources = (resourceId?: string) => {
+export const useResources = (parentId?: string) => {
   const { getResources, resources } = useBoundStore();
 
   useEffect(() => {
@@ -12,15 +12,15 @@ export const useResources = (resourceId?: string) => {
   }, []);
 
   const filteredResources = useMemo(() => {
-    if (!resources) return resources;
+    if (!resources.length) return resources;
 
-    return resources.filter(({ parentId }) => {
-      if (resourceId) {
-        return parentId === Number(resourceId);
+    return resources.filter((resource) => {
+      if (parentId) {
+        return Number(resource.parentId) === Number(parentId);
       }
-      return !parentId;
+      return !resource.parentId;
     });
-  }, [resourceId, resources]);
+  }, [parentId, resources]);
 
   return {
     resources: filteredResources,

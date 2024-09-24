@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
-import { Folder } from '../../shared/components/Folder';
-import { useResources } from '../../shared/hooks/useResources';
+import { Folder } from '../../components/Folder';
+import { useResources } from '../../hooks/useResources';
 
 export const Dashboard = () => {
   const { folderId } = useParams();

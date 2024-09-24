@@ -1,1 +1,1 @@
-export {Shared} from './Shared';
+export { Shared } from './Shared';

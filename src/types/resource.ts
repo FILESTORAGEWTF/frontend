@@ -4,11 +4,18 @@ export interface Resource {
   level: number;
   parentId: number | null;
   type: ResourceType;
+  permissionType?: PermissionType;
+  shareable: boolean;
 }
 
 export enum ResourceType {
   FOLDER = 'folder',
   FILE = 'file',
+}
+
+export enum PermissionType {
+  READ = 'read',
+  UPDATE = 'update',
 }
 
 export interface UpdateResourceData {

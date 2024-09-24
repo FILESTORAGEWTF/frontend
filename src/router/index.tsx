@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { DefaultLayout } from '../layout';
-import { Dashboard, File, Shared } from '../pages';
+import { Dashboard, Empty, File, Shared } from '../pages';
+import { AuthGuard } from './AuthGuard';
 
 export const router = createBrowserRouter([
   {
@@ -13,15 +14,19 @@ export const router = createBrowserRouter([
       },
       {
         path: 'dashboard/:folderId?',
-        Component: Dashboard,
+        element: <AuthGuard Page={Dashboard} />,
       },
       {
         path: 'shared/:folderId?',
-        Component: Shared,
+        element: <AuthGuard Page={Shared} />,
       },
       {
         path: 'file/:fileId',
-        Component: File,
+        element: <AuthGuard Page={File} />,
+      },
+      {
+        path: 'empty',
+        element: <AuthGuard Page={Empty} />,
       },
     ],
   },

@@ -1,22 +1,9 @@
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth, singInWithGoogle, singOutAccount } from '../../../../shared/auth/firebase';
-import { useEffect } from 'react';
+import { singInWithGoogle, singOutAccount } from '../../../../auth/firebase';
 
 export const Header = () => {
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (!currentUser) return;
-      const token = await currentUser.getIdToken();
-      localStorage.setItem('token', token);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
   const singIn = async () => {
     try {
-      const result = await singInWithGoogle();
-      console.log(result);
+      await singInWithGoogle();
     } catch (error) {
       console.error(error);
     }
@@ -24,8 +11,7 @@ export const Header = () => {
 
   const singOut = async () => {
     try {
-      const result = await singOutAccount();
-      console.log(result);
+      await singOutAccount();
     } catch (error) {
       console.error(error);
     }

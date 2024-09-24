@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useBoundStore from '../../store/useStore';
+import useBoundStore from '../store/useStore';
 
 export const useSharedResources = (resourceId?: string) => {
   const { sharedResources, getSharedResources, getSharedSubResources } = useBoundStore();

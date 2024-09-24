@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Folder } from '../../shared/components/Folder';
-import { useSharedResources } from '../../shared/hooks/useSharedResources';
+import { Folder } from '../../components/Folder';
+import { useSharedResources } from '../../hooks/useSharedResources';
 import { useParams } from 'react-router-dom';
 
 export const Shared: FC = () => {

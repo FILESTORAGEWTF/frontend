@@ -1,5 +1,6 @@
 import { ChangeEvent, FC, FormEvent, useState } from 'react';
-import { uploadFile } from '../../../../services/uploadFile';
+import { uploadFile } from '../../services/file';
+import useBoundStore from '../../store/useStore';
 
 interface Props {
   folderId?: string;
@@ -7,6 +8,8 @@ interface Props {
 export const FileForm: FC<Props> = ({ folderId }) => {
   const [file, setFile] = useState<File | null>(null);
   const [shareable, setShareable] = useState(false);
+
+  const { addFileData } = useBoundStore();
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -36,6 +39,7 @@ export const FileForm: FC<Props> = ({ folderId }) => {
 
     try {
       const response = await uploadFile(formData);
+      addFileData(response);
       console.log('File uploaded successfully:', response);
     } catch (error) {
       console.error('Error uploading file:', error);

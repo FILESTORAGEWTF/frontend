@@ -1,1 +1,0 @@
-export { ResourceForm } from './ResourceForm';

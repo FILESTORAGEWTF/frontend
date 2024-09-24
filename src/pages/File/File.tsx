@@ -1,9 +1,8 @@
 import { FC } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 export const File: FC = () => {
-
-  const { fileId } = useParams();
+  // const { fileId } = useParams();
 
   return (
     <div className="flex flex-col gap-10">

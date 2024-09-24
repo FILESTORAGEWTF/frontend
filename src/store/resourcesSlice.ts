@@ -6,9 +6,9 @@ import {
   fetchSharedResourcesByParentId,
   patchResource,
   postFolder,
-} from '../shared/services/fetchResources';
-import { Resource } from '../shared/types';
-import { CreateResourceData, UpdateResourceData } from '../shared/types/resource';
+} from '../services/resource';
+import { Resource } from '../types';
+import { CreateResourceData, UpdateResourceData } from '../types/resource';
 
 export interface ResourcesSlice {
   resources: Resource[];
@@ -59,8 +59,8 @@ const createResourcesSlice: StateCreator<ResourcesSlice> = (set, get) => ({
   deleteResource: async (id) => {
     await deleteResource(id);
     const { resources } = get();
-    const newOrderList: Resource[] = resources.filter((resource) => resource.id !== id);
-    set({ resources: newOrderList });
+    const newResources: Resource[] = resources.filter((resource) => resource.id !== id);
+    set({ resources: newResources });
   },
 
   getSharedResources: async () => {
