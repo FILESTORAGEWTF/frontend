@@ -8,6 +8,10 @@ interface Props {
 export const ConfirmDelete: FC<Props> = ({ resourceId, name }) => {
   const { deleteResource, closeModal } = useBoundStore();
 
+  const onDelete = async () => {
+    await deleteResource(resourceId);
+    closeModal();
+  };
   return (
     <div className="flex flex-col gap-10 p-5 max-w-[600px]">
       <h6 className="ext-lg font-semibold">{`Are you sure you want to delete the ${name} resource, ll resources inside will also be deleted`}</h6>
@@ -15,10 +19,7 @@ export const ConfirmDelete: FC<Props> = ({ resourceId, name }) => {
         <button onClick={closeModal} className="border-2 mt-5 rounded-md p-2 bg-gray-300 hover:bg-gray-400">
           cancel
         </button>
-        <button
-          onClick={() => deleteResource(resourceId)}
-          className="border-2 mt-5 rounded-md p-2 bg-gray-300 hover:bg-gray-400"
-        >
+        <button onClick={onDelete} className="border-2 mt-5 rounded-md p-2 bg-gray-300 hover:bg-gray-400">
           delete
         </button>
       </div>

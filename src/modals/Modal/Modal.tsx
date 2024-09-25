@@ -20,6 +20,7 @@ export const Modal = () => {
             parentId={modalData.data.folderId}
             resourceId={modalData.data.resourceId}
             initialValues={modalData.data.initialValues}
+            isShared={modalData.data.isShared}
           />
         );
 

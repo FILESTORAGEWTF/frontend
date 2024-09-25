@@ -6,6 +6,7 @@ export interface Resource {
   type: ResourceType;
   permissionType?: PermissionType;
   shareable: boolean;
+  storedFilename: string | null;
 }
 
 export enum ResourceType {

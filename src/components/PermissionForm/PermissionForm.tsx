@@ -20,6 +20,7 @@ interface Props {
 }
 export const PermissionsForm: React.FC<Props> = ({ resourceId, name }) => {
   const { users, setUsers } = useBoundStore();
+  const { closeModal } = useBoundStore();
 
   const usersMap = useMemo(() => new Map(users.map((user) => [user.email, user.id])), [users]);
 
@@ -42,7 +43,7 @@ export const PermissionsForm: React.FC<Props> = ({ resourceId, name }) => {
     name: 'permissions',
   });
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     const permissionsToSubmit = {
       resourceId,
       permissions: data.permissions.map(({ email, type }) => ({
@@ -52,7 +53,8 @@ export const PermissionsForm: React.FC<Props> = ({ resourceId, name }) => {
       })),
     };
 
-    postPermissions(permissionsToSubmit);
+    await postPermissions(permissionsToSubmit);
+    closeModal();
   };
 
   return (
@@ -66,7 +68,7 @@ export const PermissionsForm: React.FC<Props> = ({ resourceId, name }) => {
             render={({ field }) => (
               <select
                 {...field}
-                className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="border border-gray-300 bg-white rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Select User</option>
                 {users.map((user) => {
@@ -88,7 +90,7 @@ export const PermissionsForm: React.FC<Props> = ({ resourceId, name }) => {
             render={({ field }) => (
               <select
                 {...field}
-                className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="border border-gray-300 bg-white rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="read">Read</option>
                 <option value="update">Update</option>

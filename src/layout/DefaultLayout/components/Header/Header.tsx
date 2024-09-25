@@ -2,6 +2,7 @@ import { MdLogout } from 'react-icons/md';
 import { FcGoogle } from 'react-icons/fc';
 import useBoundStore from '~/store/useStore';
 import { singInWithGoogle, singOutAccount } from '~/auth/firebase';
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
   const { isLoggedIn } = useBoundStore();
@@ -27,12 +28,22 @@ export const Header = () => {
       <h3 className="text-lg font-semibold">VReal Soft test project</h3>
       <div className="flex gap-4 items-center">
         {isLoggedIn ? (
-          <button
-            className="rounded-md bg-white hover:bg-gray-400 p-1 px-3 font-semibold flex gap-2 items-center"
-            onClick={singOut}
-          >
-            sing out <MdLogout />
-          </button>
+          <>
+            <ul className="flex gap-2 font-bold mr-6 uppercase">
+              <Link to="/dashboard" className="hover:underline">
+                dashboard
+              </Link>
+              <Link to="/shared" className="hover:underline">
+                shared
+              </Link>
+            </ul>
+            <button
+              className="rounded-md bg-white hover:bg-gray-400 p-1 px-3 font-semibold flex gap-2 items-center"
+              onClick={singOut}
+            >
+              sing out <MdLogout />
+            </button>
+          </>
         ) : (
           <button
             className="rounded-md bg-white hover:bg-gray-200 p-1 px-3 flex gap-2 items-center font-semibold"

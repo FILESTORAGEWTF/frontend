@@ -14,10 +14,12 @@ interface Props {
   resourceId?: number;
   parentId?: string | null;
   initialValues?: FormValues;
+  isShared?: boolean;
 }
 
-export const ResourceForm: FC<Props> = ({ resourceId, parentId = null, initialValues }) => {
-  const { updateResource, createFolder } = useBoundStore();
+export const ResourceForm: FC<Props> = ({ resourceId, parentId = null, initialValues, isShared }) => {
+  const { updateResource, createFolder, closeModal, updateSharedResource } = useBoundStore();
+
   const {
     register,
     handleSubmit,
@@ -31,6 +33,10 @@ export const ResourceForm: FC<Props> = ({ resourceId, parentId = null, initialVa
     },
   });
 
+  console.log('onUpdate', isShared);
+
+  const onUpdate = isShared ? updateSharedResource : updateResource;
+
   useEffect(() => {
     if (initialValues) {
       setValue('name', initialValues.name);
@@ -42,13 +48,15 @@ export const ResourceForm: FC<Props> = ({ resourceId, parentId = null, initialVa
     const { name, shareable } = data;
     try {
       if (initialValues && resourceId) {
-        return updateResource({ name, shareable }, resourceId);
+        return onUpdate({ name, shareable }, resourceId);
       } else {
         console.log(parentId);
         return createFolder({ name, shareable, parentId, type: ResourceType.FOLDER });
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      closeModal();
     }
   };
 
@@ -70,7 +78,13 @@ export const ResourceForm: FC<Props> = ({ resourceId, parentId = null, initialVa
 
       <div className="flex flex-col items-start gap-3">
         <label htmlFor="shareable" className="flex items-center text-lg font-semibold">
-          <input {...register('shareable')} type="checkbox" id="shareable" name="shareable" className="mr-2" />
+          <input
+            {...register('shareable')}
+            type="checkbox"
+            id="shareable"
+            name="shareable"
+            className="mr-2 bg-white border-none opacity-50 checked:opacity-100 border-2"
+          />
           Sharable
         </label>
       </div>

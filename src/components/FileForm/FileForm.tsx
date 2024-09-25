@@ -9,7 +9,7 @@ export const FileForm: FC<Props> = ({ folderId }) => {
   const [file, setFile] = useState<File | null>(null);
   const [shareable, setShareable] = useState(false);
 
-  const { addFileData } = useBoundStore();
+  const { addFileData, closeModal } = useBoundStore();
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -43,6 +43,8 @@ export const FileForm: FC<Props> = ({ folderId }) => {
       console.log('File uploaded successfully:', response);
     } catch (error) {
       console.error('Error uploading file:', error);
+    } finally {
+      closeModal();
     }
   };
 

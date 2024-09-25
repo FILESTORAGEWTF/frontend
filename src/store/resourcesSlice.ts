@@ -20,6 +20,7 @@ export interface ResourcesSlice {
   deleteResource: (id: number) => Promise<void>;
 
   getSharedResources: () => Promise<void>;
+  updateSharedResource: (data: UpdateResourceData, id: number) => Promise<void>;
   getSharedSubResources: (parentId: number) => Promise<void>;
 }
 
@@ -66,6 +67,18 @@ const createResourcesSlice: StateCreator<ResourcesSlice> = (set, get) => ({
   getSharedResources: async () => {
     const response = await fetchSharedResources();
     set({ sharedResources: response });
+  },
+
+  updateSharedResource: async (data, id) => {
+    await patchResource(data, id);
+    set((state) => ({
+      sharedResources: state.sharedResources.map((resource) => {
+        if (resource.id === id) {
+          return { ...resource, ...data };
+        }
+        return resource;
+      }),
+    }));
   },
 
   getSharedSubResources: async (parentId) => {

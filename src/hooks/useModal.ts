@@ -6,15 +6,17 @@ interface Props {
   parentId: string | null;
   name: string;
   shareable: boolean;
+  isShared: boolean;
 }
 export const useModal = () => {
   const { openModal } = useBoundStore();
-  const openUpdateModal = ({ name, id, parentId, shareable }: Props) =>
+  const openUpdateModal = ({ name, id, parentId, shareable, isShared }: Props) =>
     openModal({
       modalType: ModalEnum.UPDATE_RESOURCE,
       data: {
         resourceId: id,
         parentId,
+        isShared,
         initialValues: {
           name,
           shareable,
