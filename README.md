@@ -15,5 +15,5 @@
  5) 🖥️ Running the Project
     
 ```
-   start command: yarn start:dev
+   start command: yarn dev
 ```
