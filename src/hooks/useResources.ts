@@ -5,11 +5,8 @@ export const useResources = (parentId?: string) => {
   const { getResources, resources } = useBoundStore();
 
   useEffect(() => {
-    if (!resources.length) {
-      getResources();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    getResources();
+  }, [getResources]);
 
   const filteredResources = useMemo(() => {
     if (!resources.length) return resources;

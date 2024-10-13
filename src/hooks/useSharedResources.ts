@@ -1,18 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import useBoundStore from '~/store/useStore';
 
 export const useSharedResources = (resourceId?: string) => {
-  const { sharedResources, getSharedResources, getSharedSubResources } = useBoundStore();
+  const { sharedResources, getSharedResources } = useBoundStore();
 
   useEffect(() => {
-    if (!resourceId) {
-      getSharedResources();
-    } else {
-      getSharedSubResources(+resourceId);
-    }
-  }, [getSharedResources, getSharedSubResources, resourceId]);
+    getSharedResources();
+  }, [getSharedResources]);
+
+  const filteredSharedResources = useMemo(() => {
+    return sharedResources.filter((resource) => {
+      if (resourceId) {
+        return Number(resource.parentId) === Number(resourceId);
+      }
+      return !resource.parentId;
+    });
+  }, [resourceId, sharedResources]);
 
   return {
-    sharedResources,
+    filteredSharedResources,
   };
 };
