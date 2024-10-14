@@ -3,6 +3,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { Resources } from './components';
 import { ModalEnum, Resource } from '~/types';
 import useBoundStore from '~/store/useStore';
+import { Filter } from './components';
 
 interface Props {
   resources: Resource[];
@@ -34,7 +35,7 @@ export const Folder: FC<Props> = ({ resources }) => {
 
   return (
     <div className="flex flex-col gap-10 px-5">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center border">
         <h6 className="px-3">Folder {folderId}</h6>
         {isDashboard && (
           <div className="flex gap-3 p-4">
@@ -48,7 +49,8 @@ export const Folder: FC<Props> = ({ resources }) => {
         )}
       </div>
 
-      <div className="flex justify-between">
+      <div className="flex flex-col items-start gap-3">
+        <Filter />
         {resources && <Resources isDashboard={isDashboard} resources={resources} folderId={folderId} />}
       </div>
     </div>

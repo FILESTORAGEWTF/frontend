@@ -22,11 +22,17 @@ export interface ResourcesSlice {
   getSharedResources: () => Promise<void>;
   updateSharedResource: (data: UpdateResourceData, id: number) => Promise<void>;
   getSharedSubResources: (parentId: number) => Promise<void>;
+
+  filter: string;
+  setFilter: (value: string) => void;
 }
 
 const createResourcesSlice: StateCreator<ResourcesSlice> = (set, get) => ({
+  filter: '',
   resources: [],
   sharedResources: [],
+
+  setFilter: (value: string) => set({ filter: value }),
   getResources: async () => {
     const response = await fetchResources();
     set({ resources: response });
